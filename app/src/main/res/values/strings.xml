@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="home">Home</string>
-    <string name="wardrobe">Wardrobe</string>
-    <string name="profile">Profile</string>
+    <string name="title_activity_bottom_navigation">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_wardrobe">Wardrobe</string>
+    <string name="title_profile">Profile</string>
 </resources>
