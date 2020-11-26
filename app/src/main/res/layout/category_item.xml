@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="property"
+            type="com.example.myapplication.network.CategoryResponseItem" />
+    </data>
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/category_card_width"
+        android:layout_height="@dimen/category_card_height"
+        android:layout_marginTop="@dimen/card_margin_top"
+        card_view:cardCornerRadius="@dimen/card_corner_radius">
+        <TextView
+            android:id="@+id/search_text_view"
+            android:gravity="center_vertical"
+            android:layout_marginStart="@dimen/card_text_margin"
+            android:text="@{property.name}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.cardview.widget.CardView>
+</layout>
