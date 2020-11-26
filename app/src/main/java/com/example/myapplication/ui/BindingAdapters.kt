@@ -10,11 +10,19 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
 import com.example.myapplication.network.ApiStatus
 import com.example.myapplication.network.CategoryResponseItem
+import com.example.myapplication.network.ClothesResponseItem
 import com.example.myapplication.ui.adapters.CategoriesAdapter
+import com.example.myapplication.ui.adapters.ClothesAdapter
 
 @BindingAdapter("categoryListData")
 fun bindCategoryRecyclerView(recyclerView: RecyclerView, data: List<CategoryResponseItem>?) {
     val adapter = recyclerView.adapter as CategoriesAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("clothesListData")
+fun bindClothesRecyclerView(recyclerView: RecyclerView, data: List<ClothesResponseItem>?) {
+    val adapter = recyclerView.adapter as ClothesAdapter
     adapter.submitList(data)
 }
 

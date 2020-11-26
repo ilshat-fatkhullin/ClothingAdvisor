@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentClothesBinding
+import com.example.myapplication.ui.adapters.CategoriesAdapter
+import com.example.myapplication.ui.adapters.ClothesAdapter
 
 class ClothesFragment : Fragment() {
 
@@ -21,6 +23,11 @@ class ClothesFragment : Fragment() {
         val categoryResponseItem = ClothesFragmentArgs.fromBundle(requireArguments()).selectedCategory
         val viewModelFactory = ClothesViewModelFactory(categoryResponseItem, application)
         binding.viewModel = ViewModelProvider(this, viewModelFactory).get(ClothesViewModel::class.java)
+        binding.clothesGrid.adapter =
+            ClothesAdapter(
+                ClothesAdapter.OnClickListener {
+
+                })
         return binding.root
     }
 }
