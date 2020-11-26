@@ -4,6 +4,8 @@ interface Provider {
     fun Provider()
     fun Provider(config: HashMap<String, String>)
 
+    fun init();
+
     /**
      * Config is used to pass various data to the provider, e.g. an API key
      */
