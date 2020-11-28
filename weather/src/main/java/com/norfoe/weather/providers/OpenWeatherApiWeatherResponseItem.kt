@@ -41,7 +41,7 @@ data class ResponseWind(
     val deg: Int? = 0)
 
 data class ResponseSnow(
-    @Json(name="1h") val h1: Int? = 0)
+    @Json(name="1h") val h1: Float? = 0.0f)
 
 data class ResponseClouds(
     val all: Int? = 0)

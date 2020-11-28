@@ -5,12 +5,12 @@ class Weather {
 
     private var cityName: String? = ""
 
-    fun Weather(provider: Provider, config: HashMap<String, String>) {
+    constructor(provider: Provider, config: HashMap<String, String>) {
         this.provider = provider
         this.provider.setConfig(config)
     }
 
-    fun Weather(provider: Provider) {
+    constructor(provider: Provider) {
         this.provider = provider
     }
 

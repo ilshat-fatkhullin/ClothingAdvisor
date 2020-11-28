@@ -12,13 +12,13 @@ class OpenWeatherApiProvider : Provider {
 
     private lateinit var retrofit: Retrofit
 
-    override fun Provider() {
-        val config = HashMap<String, String>()
-        config["appid"] = "1734842d30f08a342f6c4da064960181"
-        Provider(config)
+    constructor() {
+        config = HashMap<String, String>()
+        config["appid"] = "f6f81ef69442b7b7f2ba4bf66326a285"
+        init()
     }
 
-    override fun Provider(config: HashMap<String, String>) {
+    constructor(config: HashMap<String, String>) {
         this.config = config
         init()
     }
@@ -31,12 +31,19 @@ class OpenWeatherApiProvider : Provider {
         this.config = config
     }
 
-    override suspend fun fetch(cityName: String): WeatherInfo {
+    override suspend fun fetch(cityName: String?): WeatherInfo {
         val weather = OpenWeatherApi.retrofitService.getWeather(cityName, config["appid"])
-        return WeatherInfo(weather.main?.temp)
+        return WeatherInfo(
+            weather.main?.temp,
+            weather.main?.feels_like,
+            weather.wind?.speed?.toFloat(),
+            weather.wind?.deg,
+            weather.main?.pressure,
+            weather.main?.humidity,
+            "${weather.name}, ${weather.sys?.country}")
     }
 
-    override suspend fun fetch(lat: String, lon: String): WeatherInfo {
+    override suspend fun fetch(lat: String?, lon: String?): WeatherInfo {
         TODO("Not yet implemented")
     }
 }

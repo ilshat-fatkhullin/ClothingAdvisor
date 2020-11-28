@@ -1,9 +1,6 @@
 package com.norfoe.weather
 
 interface Provider {
-    fun Provider()
-    fun Provider(config: HashMap<String, String>)
-
     fun init();
 
     /**
