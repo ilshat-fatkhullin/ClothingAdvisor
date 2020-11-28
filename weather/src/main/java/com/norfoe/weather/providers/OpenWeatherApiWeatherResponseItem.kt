@@ -1,5 +1,7 @@
 package com.norfoe.weather.providers
 
+import com.squareup.moshi.Json
+
 data class OpenWeatherApiWeatherResponseItem(
     val coord: ResponseCoord? = ResponseCoord(),
     val weather: List<ResponseWeather>? = ArrayList<ResponseWeather>(),
@@ -7,14 +9,14 @@ data class OpenWeatherApiWeatherResponseItem(
     val main: ResponseMain? = ResponseMain(),
     val visibility: String? = "",
     val wind: ResponseWind? = ResponseWind(),
+    val snow: ResponseSnow? = ResponseSnow(),
     val clouds: ResponseClouds? = ResponseClouds(),
     val dt: Long? = 0,
     val sys: ResponseSys? = ResponseSys(),
     val timezone: Int? = 0,
     val id: Int? = 0,
     val name: String? = "",
-    val cod: Int? = 0
-)
+    val cod: Int? = 0)
 
 data class ResponseWeather(
     val id: Int? = 0,
@@ -37,6 +39,9 @@ data class ResponseMain(
 data class ResponseWind(
     val speed: Int? = 0,
     val deg: Int? = 0)
+
+data class ResponseSnow(
+    @Json(name="1h") val h1: Int? = 0)
 
 data class ResponseClouds(
     val all: Int? = 0)

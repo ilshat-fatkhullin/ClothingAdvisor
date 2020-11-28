@@ -2,10 +2,15 @@ package com.norfoe.weather.providers
 
 import com.norfoe.weather.Provider
 import com.norfoe.weather.WeatherInfo
+import retrofit2.Retrofit
+import retrofit2.await
+import retrofit2.awaitResponse
 
 class OpenWeatherApiProvider : Provider {
     private lateinit var config: HashMap<String, String>
     private var initialized = false
+
+    private lateinit var retrofit: Retrofit
 
     override fun Provider() {
         val config = HashMap<String, String>()
@@ -26,11 +31,12 @@ class OpenWeatherApiProvider : Provider {
         this.config = config
     }
 
-    override fun fetch(cityName: String): WeatherInfo {
-        TODO("Not yet implemented")
+    override suspend fun fetch(cityName: String): WeatherInfo {
+        val weather = OpenWeatherApi.retrofitService.getWeather(cityName, config["appid"])
+        return WeatherInfo(weather.main?.temp)
     }
 
-    override fun fetch(lat: String, lon: String): WeatherInfo {
+    override suspend fun fetch(lat: String, lon: String): WeatherInfo {
         TODO("Not yet implemented")
     }
 }

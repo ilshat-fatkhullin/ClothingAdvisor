@@ -11,6 +11,6 @@ interface Provider {
      */
     fun setConfig(config: HashMap<String, String>)
 
-    fun fetch(cityName: String): WeatherInfo
-    fun fetch(lat: String, lon: String): WeatherInfo
+    suspend fun fetch(cityName: String? = ""): WeatherInfo
+    suspend fun fetch(lat: String? = "0", lon: String? = "0"): WeatherInfo
 }

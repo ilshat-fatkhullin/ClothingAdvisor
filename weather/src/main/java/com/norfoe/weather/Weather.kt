@@ -3,6 +3,8 @@ package com.norfoe.weather
 class Weather {
     private lateinit var provider: Provider
 
+    private var cityName: String? = ""
+
     fun Weather(provider: Provider, config: HashMap<String, String>) {
         this.provider = provider
         this.provider.setConfig(config)
@@ -16,7 +18,11 @@ class Weather {
         this.provider = provider
     }
 
-    fun setLocation(city: String) {
+    fun setCity(cityName: String?) {
+        this.cityName = cityName
+    }
 
+    suspend fun current() : WeatherInfo {
+        return provider.fetch(cityName)
     }
 }

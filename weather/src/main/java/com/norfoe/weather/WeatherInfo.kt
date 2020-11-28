@@ -1,5 +1,4 @@
 package com.norfoe.weather
 
-class WeatherInfo {
-
-}
+data class WeatherInfo(
+    val temp: Float? = 0.0f)
