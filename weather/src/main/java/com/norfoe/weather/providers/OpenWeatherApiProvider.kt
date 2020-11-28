@@ -8,7 +8,9 @@ class OpenWeatherApiProvider : Provider {
     private var initialized = false
 
     override fun Provider() {
-        TODO("Not yet implemented")
+        val config = HashMap<String, String>()
+        config["appid"] = "1734842d30f08a342f6c4da064960181"
+        Provider(config)
     }
 
     override fun Provider(config: HashMap<String, String>) {
@@ -17,7 +19,7 @@ class OpenWeatherApiProvider : Provider {
     }
 
     override fun init() {
-        initialized = config.containsKey("apikey")
+        initialized = config.containsKey("appid")
     }
 
     override fun setConfig(config: HashMap<String, String>) {
