@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "595589741391",
+    "firebase_url": "https://clothing-advisor.firebaseio.com",
+    "project_id": "clothing-advisor",
+    "storage_bucket": "clothing-advisor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595589741391:android:21262d67828b4d37ec233a",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595589741391-2i5v19rbhgb407nk824o6l7mch24ugt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6K3DpYqlqCzldqNOIJnzyuGjTAEFVkJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595589741391-2i5v19rbhgb407nk824o6l7mch24ugt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
