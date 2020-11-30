@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,10 +13,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.firebase.ui.auth.data.model.User
+import com.google.firebase.auth.FirebaseUser
 
 class BottomNavigationActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private var currUser: FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +37,10 @@ class BottomNavigationActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         auth = FirebaseAuth.getInstance()
-        startSignIn()
-    }
+        currUser = auth.currentUser
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        val user = auth.currentUser
-
-        if (user != null) {
-            TODO("Use the data for the current user")
-        } else {
-            TODO("Use the (default) data for an unregistered user")
-        }
+//        TODO add sign in button
+//        signInButton.setOnClickListener { startSignIn() }
     }
 
     private fun startSignIn() {
