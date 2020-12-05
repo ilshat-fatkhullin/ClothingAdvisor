@@ -3,18 +3,14 @@ package com.example.myapplication
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.firebase.ui.auth.data.model.User
-import com.google.android.gms.tasks.Task
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GetTokenResult
 
@@ -40,9 +36,6 @@ class BottomNavigationActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         currUser = auth.currentUser
-
-//        TODO add sign in button
-//        signInButton.setOnClickListener { startSignIn() }
     }
 
     private fun startSignIn() {
@@ -51,25 +44,35 @@ class BottomNavigationActivity : AppCompatActivity() {
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
 
+        val intent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .build()
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
         // Create and launch sign-in intent
         startActivityForResult(
-            AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .build(),
+            intent,
             RC_SIGN_IN
         )
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onStart() {
+        super.onStart()
 
+        if (currUser == null) {
+            startSignIn()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
-                val user = FirebaseAuth.getInstance().currentUser
+                currUser = FirebaseAuth.getInstance().currentUser
                 // ...
             } else {
                 // Sign in failed. If response is null the user canceled the
@@ -78,6 +81,7 @@ class BottomNavigationActivity : AppCompatActivity() {
                 // ...
             }
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     companion object {
