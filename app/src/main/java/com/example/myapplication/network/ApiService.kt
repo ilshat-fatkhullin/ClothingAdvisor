@@ -4,10 +4,9 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
-private const val BASE_URL = "https://api.thecatapi.com/v1/"
+private const val BASE_URL = "https://clothing-advisor.firebaseio.com/"
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 
@@ -21,14 +20,24 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface ApiService {
-    @GET("clothes")
-    suspend fun getClothes(@Query("api_key") apiKey: String,
-                               @Query("page") page: Int,
-                               @Query("limit") limit: Int,
-                               @Query("category_id") categoryId: Int): List<ClothesResponseItem>
+    @GET("/users/{uid}/clothes.json")
+    suspend fun getClothes(@Path("uid") userId: String,
+                           @Query("auth") accessToken: String,
+                           @Query("startAt") startAt: String,
+                           @Query("endAt") endAt: String): List<ClothesResponseItem>
 
-    @GET("categories")
-    suspend fun getCategories(): List<CategoryResponseItem>
+    @PATCH("/users/{uid}/clothes.json")
+    suspend fun addClothes(@Path("uid") userId: String,
+                           @Query("auth") accessToken: String,
+                           @Body data: String)
+
+    @GET("users/{uid}/categories.json")
+    suspend fun getCategories(@Path("uid") userId: String,
+                              @Query("auth") accessToken: String): List<CategoryResponseItem>
+
+    @PATCH("users/{uid}/categories.json")
+    suspend fun addCategories(@Path("uid") userId: String,
+                              @Query("auth") accessToken: String): List<CategoryResponseItem>
 }
 
 object Api {
