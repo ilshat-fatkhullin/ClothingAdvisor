@@ -24,20 +24,21 @@ interface ApiService {
     suspend fun getClothes(@Path("uid") userId: String,
                            @Query("auth") accessToken: String,
                            @Query("startAt") startAt: String,
-                           @Query("endAt") endAt: String): List<ClothesResponseItem>
+                           @Query("endAt") endAt: String): Map<String, ClothesResponseItem>
 
-    @PATCH("/users/{uid}/clothes.json")
+    @POST("/users/{uid}/clothes.json")
     suspend fun addClothes(@Path("uid") userId: String,
                            @Query("auth") accessToken: String,
-                           @Body data: String)
+                           @Body clothes: ClothesDbModel)
 
     @GET("users/{uid}/categories.json")
     suspend fun getCategories(@Path("uid") userId: String,
-                              @Query("auth") accessToken: String): List<CategoryResponseItem>
+                              @Query("auth") accessToken: String): Map<String, CategoryResponseItem>
 
-    @PATCH("users/{uid}/categories.json")
+    @POST("users/{uid}/categories.json")
     suspend fun addCategories(@Path("uid") userId: String,
-                              @Query("auth") accessToken: String): List<CategoryResponseItem>
+                              @Query("auth") accessToken: String,
+                              @Body category: CategoryDbModel)
 }
 
 object Api {

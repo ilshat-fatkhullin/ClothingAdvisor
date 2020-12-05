@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -64,6 +65,13 @@ class BottomNavigationActivity : AppCompatActivity() {
         if (currUser == null) {
             startSignIn()
         }
+
+//        currUser?.getIdToken(true)?.addOnCompleteListener { task: Task<GetTokenResult> ->
+//            val token = task.result?.token
+//            print(token)
+//            val uid = currUser!!.uid
+//            print(uid)
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

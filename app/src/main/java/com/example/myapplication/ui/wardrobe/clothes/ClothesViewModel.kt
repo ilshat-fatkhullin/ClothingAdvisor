@@ -45,25 +45,21 @@ class ClothesViewModel(categoryResponseItem: CategoryResponseItem, app: Applicat
         if (_clothesLoadingStatus.value == ApiStatus.LOADING)
             return
 
-        _imageLoadingJob.value = viewModelScope.launch {
-            _clothesLoadingStatus.value = ApiStatus.LOADING
-            try {
-                val result = ArrayList<ClothesResponseItem>(_clothes.value!!)
-                result.addAll(
-                    Api.retrofitService.getClothes(
-                        _apiKey.value.orEmpty(),
-                        _page.value!!,
-                        _limit.value!!,
-                        _selectedCategory.value!!.id
-                    )
-                )
-                _clothes.value = result
-                _clothesLoadingStatus.value = ApiStatus.DONE
-                _page.value = _page.value!! + 1
-            } catch (e: Exception) {
-                _clothesLoadingStatus.value = ApiStatus.ERROR
-            }
-        }
+//        _imageLoadingJob.value = viewModelScope.launch {
+//            _clothesLoadingStatus.value = ApiStatus.LOADING
+//            try {
+//                val result = ArrayList<ClothesResponseItem>(_clothes.value!!)
+//                result.addAll(
+//                    Api.retrofitService.getClothes(
+//                    )
+//                )
+//                _clothes.value = result
+//                _clothesLoadingStatus.value = ApiStatus.DONE
+//                _page.value = _page.value!! + 1
+//            } catch (e: Exception) {
+//                _clothesLoadingStatus.value = ApiStatus.ERROR
+//            }
+//        }
     }
 
     fun onScrolledUntilEnd() {
