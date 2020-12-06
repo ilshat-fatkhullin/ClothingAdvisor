@@ -5,4 +5,7 @@
     <string name="title_wardrobe">Wardrobe</string>
     <string name="title_profile">Profile</string>
     <string name="image">Image</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_out">Sign out</string>
 </resources>
