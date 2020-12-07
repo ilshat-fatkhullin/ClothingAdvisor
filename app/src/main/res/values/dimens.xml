@@ -8,4 +8,6 @@
     <dimen name="card_margin_top">10dp</dimen>
     <dimen name="card_text_margin">20dp</dimen>
     <dimen name="grid_view_padding">6dp</dimen>
+    <dimen name="fab_margin_end">16dp</dimen>
+    <dimen name="fab_margin_bottom">64dp</dimen>
 </resources>

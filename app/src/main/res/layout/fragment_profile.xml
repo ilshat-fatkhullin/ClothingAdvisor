@@ -4,13 +4,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.myapplication.ui.profile.ProfileViewModel" />
+            type="com.group5.clothing_advisor.ui.profile.ProfileViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/sign_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/sign_out"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"

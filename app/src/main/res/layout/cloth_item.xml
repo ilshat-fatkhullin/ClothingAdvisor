@@ -5,7 +5,7 @@
     <data>
         <variable
             name="cloth"
-            type="com.example.myapplication.network.ClothesResponseItem" />
+            type="com.group5.clothing_advisor.data.ClothesResponseItem" />
     </data>
     <ImageView
         android:id="@+id/grid_image_view"

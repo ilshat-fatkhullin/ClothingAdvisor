@@ -5,7 +5,7 @@
     <data>
         <variable
             name="property"
-            type="com.example.myapplication.network.CategoryResponseItem" />
+            type="com.group5.clothing_advisor.data.CategoryResponseItem" />
     </data>
     <androidx.cardview.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"

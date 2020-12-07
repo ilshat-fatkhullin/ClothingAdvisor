@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.example.myapplication.ui.wardrobe.categories.CategoriesFragment"
+        android:name="com.group5.clothing_advisor.ui.wardrobe.categories.CategoriesFragment"
         android:label="fragment_overview"
         tools:layout="@layout/fragment_categories" >
         <action
@@ -17,12 +17,12 @@
 
     <fragment
         android:id="@+id/clothesFragment"
-        android:name="com.example.myapplication.ui.wardrobe.clothes.ClothesFragment"
+        android:name="com.group5.clothing_advisor.ui.wardrobe.clothes.ClothesFragment"
         android:label="fragment_clothes"
         tools:layout="@layout/fragment_clothes">
         <argument
             android:name="selectedCategory"
-            app:argType="com.example.myapplication.network.CategoryResponseItem"
+            app:argType="com.group5.clothing_advisor.data.CategoryResponseItem"
             />
     </fragment>
 </navigation>

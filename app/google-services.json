@@ -15,6 +15,43 @@
       },
       "oauth_client": [
         {
+          "client_id": "595589741391-hmeg82pguoa0fsdh7vpgtop38nka5lbg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "1832fbea74014fe38dbbd5002f6fc9056a41bf0b"
+          }
+        },
+        {
+          "client_id": "595589741391-2i5v19rbhgb407nk824o6l7mch24ugt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6K3DpYqlqCzldqNOIJnzyuGjTAEFVkJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595589741391-2i5v19rbhgb407nk824o6l7mch24ugt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595589741391:android:2f0210923af0646bec233a",
+        "android_client_info": {
+          "package_name": "com.group5.clothing_advisor"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "595589741391-2i5v19rbhgb407nk824o6l7mch24ugt9.apps.googleusercontent.com",
           "client_type": 3
         }
