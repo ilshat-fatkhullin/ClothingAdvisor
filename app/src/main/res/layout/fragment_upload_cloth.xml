@@ -2,11 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable
             name="viewModel"
-            type="com.group5.clothing_advisor.ui.wardrobe.cloth_details.ClothDetailsViewModel" />
+            type="com.group5.clothing_advisor.ui.wardrobe.upload_cloth.UploadClothViewModel" />
+        <import type="android.view.View"/>
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,12 +22,26 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
+
+        <Spinner
+            android:id="@+id/categories_spinner"
+            app:layout_constraintTop_toBottomOf="@id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <Button
-            android:id="@+id/remove"
+            android:id="@+id/add"
+            app:layout_constraintBottom_toTopOf="@id/upload_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isValid() ? View.VISIBLE:View.GONE}"
+            android:text="@string/add"/>
+        <Button
+            android:id="@+id/upload_photo"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/fab_margin_bottom"
-            android:text="@string/remove"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_photo"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

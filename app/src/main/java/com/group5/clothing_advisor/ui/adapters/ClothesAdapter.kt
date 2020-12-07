@@ -6,33 +6,39 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.module.AppGlideModule
+import com.google.firebase.storage.FirebaseStorage
 import com.group5.clothing_advisor.databinding.ClothItemBinding
-import com.group5.clothing_advisor.data.ClothesResponseItem
+import com.group5.clothing_advisor.data.ClothResponseItem
 
 class ClothesAdapter(private val onClickListener: OnClickListener) :
-    ListAdapter<ClothesResponseItem, ClothesAdapter.ClothesResponseViewHolder>(
+    ListAdapter<ClothResponseItem, ClothesAdapter.ClothesResponseViewHolder>(
         DiffCallback
     ) {
 
     class ClothesResponseViewHolder(private var binding: ClothItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(theCatSearchResponseItem: ClothesResponseItem) {
-            binding.cloth = theCatSearchResponseItem
+        fun bind(clothResponseItem: ClothResponseItem) {
+            Glide.with(binding.root)
+                .load(FirebaseStorage.getInstance().reference.child(clothResponseItem.imgSrcUrl))
+                .into(binding.gridImageView)
+            binding.cloth = clothResponseItem
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ClothesResponseItem>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<ClothResponseItem>() {
         override fun areItemsTheSame(
-            oldItem: ClothesResponseItem,
-            newItem: ClothesResponseItem
+            oldItem: ClothResponseItem,
+            newItem: ClothResponseItem
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ClothesResponseItem,
-            newItem: ClothesResponseItem
+            oldItem: ClothResponseItem,
+            newItem: ClothResponseItem
         ): Boolean {
             return oldItem.id == newItem.id
         }
@@ -55,8 +61,8 @@ class ClothesAdapter(private val onClickListener: OnClickListener) :
         holderSearchResponse.bind(marsProperty)
     }
 
-    class OnClickListener(val clickListener: (theCatSearchResponseItem: ClothesResponseItem) -> Unit) {
-        fun onClick(theCatSearchResponseItem: ClothesResponseItem) =
+    class OnClickListener(val clickListener: (theCatSearchResponseItem: ClothResponseItem) -> Unit) {
+        fun onClick(theCatSearchResponseItem: ClothResponseItem) =
             clickListener(theCatSearchResponseItem)
     }
 }

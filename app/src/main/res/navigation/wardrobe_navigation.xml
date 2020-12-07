@@ -3,26 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/wardrobe_navigation"
-    app:startDestination="@id/categoriesFragment">
+    app:startDestination="@id/clothesListFragment">
 
     <fragment
-        android:id="@+id/categoriesFragment"
-        android:name="com.group5.clothing_advisor.ui.wardrobe.categories.CategoriesFragment"
+        android:id="@+id/clothesListFragment"
+        android:name="com.group5.clothing_advisor.ui.wardrobe.clothes_list.ClothesListFragment"
         android:label="fragment_overview"
-        tools:layout="@layout/fragment_categories" >
+        tools:layout="@layout/fragment_clothes_list">
         <action
-            android:id="@+id/action_showClothes"
-            app:destination="@id/clothesFragment" />
+            android:id="@+id/action_showCloth"
+            app:destination="@id/clothesDetailsFragment" />
+        <action
+            android:id="@+id/action_uploadCloth"
+            app:destination="@id/uploadClothFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/clothesFragment"
-        android:name="com.group5.clothing_advisor.ui.wardrobe.clothes.ClothesFragment"
+        android:id="@+id/clothesDetailsFragment"
+        android:name="com.group5.clothing_advisor.ui.wardrobe.cloth_details.ClothDetailsFragment"
         android:label="fragment_clothes"
-        tools:layout="@layout/fragment_clothes">
+        tools:layout="@layout/fragment_cloth_details">
         <argument
-            android:name="selectedCategory"
-            app:argType="com.group5.clothing_advisor.data.CategoryResponseItem"
-            />
+            android:name="selectedCloth"
+            app:argType="com.group5.clothing_advisor.data.ClothResponseItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/uploadClothFragment"
+        android:name="com.group5.clothing_advisor.ui.wardrobe.upload_cloth.UploadClothFragment"
+        android:label="fragment_upload_cloth"
+        tools:layout="@layout/fragment_upload_cloth">
     </fragment>
 </navigation>

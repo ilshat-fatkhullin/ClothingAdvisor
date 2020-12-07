@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.group5.clothing_advisor.R
 import com.group5.clothing_advisor.data.ApiStatus
 import com.group5.clothing_advisor.data.CategoryResponseItem
-import com.group5.clothing_advisor.data.ClothesResponseItem
+import com.group5.clothing_advisor.data.ClothResponseItem
 import com.group5.clothing_advisor.ui.adapters.CategoriesAdapter
 import com.group5.clothing_advisor.ui.adapters.ClothesAdapter
 
@@ -21,7 +21,7 @@ fun bindCategoryRecyclerView(recyclerView: RecyclerView, data: List<CategoryResp
 }
 
 @BindingAdapter("clothesListData")
-fun bindClothesRecyclerView(recyclerView: RecyclerView, data: List<ClothesResponseItem>?) {
+fun bindClothesRecyclerView(recyclerView: RecyclerView, data: List<ClothResponseItem>?) {
     val adapter = recyclerView.adapter as ClothesAdapter
     adapter.submitList(data)
 }

@@ -6,12 +6,18 @@
     <data>
         <variable
             name="viewModel"
-            type="com.group5.clothing_advisor.ui.wardrobe.clothes.ClothesViewModel" />
+            type="com.group5.clothing_advisor.ui.wardrobe.clothes_list.ClothesListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/categories_spinner"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/clothes_grid"
@@ -23,7 +29,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/categories_spinner"
             app:clothesListData="@{viewModel.clothes}"
             app:spanCount="2"
             tools:itemCount="16"
@@ -39,6 +45,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:apiStatus="@{viewModel.clothesLoadingStatus}"
             android:contentDescription="@string/image" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"

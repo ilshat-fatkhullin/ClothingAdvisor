@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.group5.clothing_advisor.R
-import com.group5.clothing_advisor.ui.wardrobe.clothes.ClothesFragment
+import com.group5.clothing_advisor.ui.wardrobe.clothes_list.ClothesListFragment
 
 class WardrobeFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ClothesFragment()
+        fun newInstance() =
+            ClothesListFragment()
     }
 
     private lateinit var viewModel: WardrobeViewModel

@@ -5,15 +5,14 @@
     <data>
         <variable
             name="cloth"
-            type="com.group5.clothing_advisor.data.ClothesResponseItem" />
+            type="com.group5.clothing_advisor.data.ClothResponseItem" />
     </data>
     <ImageView
         android:id="@+id/grid_image_view"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:padding="2dp"
-        app:imageUrl="@{cloth.imgSrcUrl}"
-        tools:src="@tools:sample/backgrounds/scenic"/>
+        tools:src="@tools:sample/backgrounds/scenic" />
 </layout>
