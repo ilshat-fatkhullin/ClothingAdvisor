@@ -11,4 +11,5 @@
     <dimen name="fab_margin_end">16dp</dimen>
     <dimen name="fab_margin_bottom">64dp</dimen>
     <dimen name="action_bar_height">16dp</dimen>
+    <dimen name="text_margin">10dp</dimen>
 </resources>
