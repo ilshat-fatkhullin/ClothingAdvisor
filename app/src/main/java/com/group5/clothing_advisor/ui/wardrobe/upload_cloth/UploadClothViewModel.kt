@@ -156,7 +156,7 @@ class UploadClothViewModel : ViewModel() {
         val cloth = hashMapOf(
             "category_id" to _selectedCategory.value!!.id,
             "image_url" to imageId,
-            "temperature_url" to _selectedTemperature.value!!.id
+            "temperature_id" to _selectedTemperature.value!!.id
         )
         FirebaseFirestore.getInstance().collection("users")
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
