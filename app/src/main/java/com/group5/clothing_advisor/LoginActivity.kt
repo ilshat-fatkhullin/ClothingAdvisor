@@ -60,6 +60,11 @@ class LoginActivity : AppCompatActivity() {
                 // ...
             }
         }
+
+        if (requestCode == RC_SIGN_UP){
+            currUser?.sendEmailVerification()
+        }
+
         super.onActivityResult(requestCode, resultCode, data)
     }
 
