@@ -10,8 +10,13 @@ import com.google.firebase.auth.FirebaseUser
 private const val TAG = "ProfileViewModel"
 
 class ProfileViewModel : ViewModel() {
-    val _userName = MutableLiveData<String?>(null)
+    private val _userName = MutableLiveData<String?>("<Unauthorized>")
     val userName: LiveData<String?> get() = _userName
+
+    private val _isVerified = MutableLiveData(true)
+    val isVerified: LiveData<Boolean> get() = _isVerified
+
+    private lateinit var currUser: FirebaseUser
 
     init {
         val user = FirebaseAuth.getInstance().currentUser
@@ -19,7 +24,12 @@ class ProfileViewModel : ViewModel() {
             Log.wtf(TAG, "The user is not authenticated, he should not have access to profile!")
         }
         else {
+            currUser = user
             _userName.postValue(user.displayName)
         }
+    }
+
+    fun sendVerificationLink() {
+        currUser.sendEmailVerification()
     }
 }

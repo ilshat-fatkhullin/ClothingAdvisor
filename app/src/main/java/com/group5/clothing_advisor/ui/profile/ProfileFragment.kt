@@ -24,19 +24,23 @@ class ProfileFragment : Fragment() {
         val binding = FragmentProfileBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.sendVerification.setOnClickListener {
+            viewModel.sendVerificationLink()
+        }
         binding.signOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(activity, LoginActivity::class.java))
         }
 
         viewModel.userName.observe(viewLifecycleOwner){ name ->
-            // Do not show log out button if the user is (somehow) not logged in
-            if(name == null){
-                binding.signOut.visibility = View.GONE
-            }
-            else {
-                binding.nameText.text = name
-                binding.signOut.visibility = View.VISIBLE
+            binding.nameText.text = name
+        }
+
+        viewModel.isVerified.observe(viewLifecycleOwner) { isVerified ->
+            if (isVerified) {
+                binding.sendVerification.visibility = View.GONE
+            } else {
+                binding.sendVerification.visibility = View.VISIBLE
             }
         }
 
