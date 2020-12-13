@@ -32,10 +32,6 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(activity, LoginActivity::class.java))
         }
 
-        viewModel.userName.observe(viewLifecycleOwner){ name ->
-            binding.nameText.text = name
-        }
-
         viewModel.isVerified.observe(viewLifecycleOwner) { isVerified ->
             if (isVerified) {
                 binding.sendVerification.visibility = View.GONE
