@@ -25,9 +25,9 @@
 
         <Spinner
             android:id="@+id/categories_spinner"
-            app:layout_constraintTop_toBottomOf="@id/photo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/photo" />
 
         <Button
             android:id="@+id/add"
@@ -43,5 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/upload_photo"/>
+
+        <Spinner
+            android:id="@+id/temperature_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categories_spinner" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

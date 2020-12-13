@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.group5.clothing_advisor.R
 import com.group5.clothing_advisor.data.CategoryResponseItem
+import com.group5.clothing_advisor.data.TemperatureResponseItem
 import com.group5.clothing_advisor.databinding.FragmentClothesListBinding
 import com.group5.clothing_advisor.databinding.FragmentUploadClothBinding
 import com.group5.clothing_advisor.ui.adapters.ClothesAdapter
@@ -57,6 +58,22 @@ class UploadClothFragment : Fragment() {
                     viewModel.selectCategory(position)
                 }
             }
+        binding.temperatureSpinner.adapter = createAdapter()
+        binding.temperatureSpinner.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                    }
+
+                    override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                    ) {
+                        viewModel.selectTemperature(position)
+                    }
+                }
         binding.uploadPhoto.setOnClickListener {
             launchGallery()
         }
@@ -65,6 +82,9 @@ class UploadClothFragment : Fragment() {
         }
         viewModel.categories.observe(this.viewLifecycleOwner, Observer {
             setCategories(it)
+        })
+        viewModel.temperatures.observe(this.viewLifecycleOwner, Observer {
+            setTemperatures(it)
         })
         viewModel.navigateBack.observe(this.viewLifecycleOwner, Observer {
             if (it) {
@@ -97,6 +117,14 @@ class UploadClothFragment : Fragment() {
         adapter.clear()
         for (category in categories) {
             adapter.add(category.name)
+        }
+    }
+
+    private fun setTemperatures(temps: List<TemperatureResponseItem>) {
+        val adapter = binding.temperatureSpinner.adapter as ArrayAdapter<String>
+        adapter.clear()
+        for (temp in temps) {
+            adapter.add(temp.name)
         }
     }
 
