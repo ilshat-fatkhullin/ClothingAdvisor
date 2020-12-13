@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.firebase.ui.auth.AuthUI
@@ -63,6 +64,10 @@ class LoginActivity : AppCompatActivity() {
 
         if (requestCode == RC_SIGN_UP){
             currUser?.sendEmailVerification()
+        }
+        if (currUser?.isEmailVerified == false){
+            Toast.makeText(applicationContext, "Verify your email please.", Toast.LENGTH_SHORT)
+                .show()
         }
 
         super.onActivityResult(requestCode, resultCode, data)
