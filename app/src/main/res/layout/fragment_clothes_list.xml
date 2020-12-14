@@ -13,25 +13,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/categories_spinner"
-            android:layout_marginTop="@dimen/fab_margin_end"
-            app:layout_constraintTop_toTopOf="parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/grid_view_padding"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/category_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/grid_view_padding"
+                    android:gravity="end"
+                    android:text="@string/category"
+                    android:textSize="@dimen/title_text_size" />
+
+                <Spinner
+                    android:id="@+id/categories_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spinner_height"
+                    android:layout_margin="@dimen/grid_view_padding" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/clothes_grid"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="@dimen/grid_view_padding"
             android:clipToPadding="false"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/categories_spinner"
+            android:layout_margin="@dimen/grid_view_padding"
             app:clothesListData="@{viewModel.clothes}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/cardView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:spanCount="2"
             tools:itemCount="16"
             tools:listitem="@layout/cloth_item" />

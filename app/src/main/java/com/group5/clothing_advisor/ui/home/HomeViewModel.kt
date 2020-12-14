@@ -51,6 +51,9 @@ class HomeViewModel : ViewModel() {
         if (_recommendationLoadingStatus.value == ApiStatus.LOADING)
             return
 
+        if (FirebaseAuth.getInstance().currentUser == null)
+            return
+
         FirebaseFirestore.getInstance().collection("users")
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .collection("clothes").get()
