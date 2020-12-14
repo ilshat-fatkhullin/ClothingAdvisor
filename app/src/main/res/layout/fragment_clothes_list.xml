@@ -15,6 +15,7 @@
 
         <Spinner
             android:id="@+id/categories_spinner"
+            android:layout_marginTop="@dimen/fab_margin_end"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -54,7 +55,7 @@
             android:src="@drawable/ic_baseline_add_24"
             android:contentDescription="@string/add"
             android:layout_marginEnd="@dimen/fab_margin_end"
-            android:layout_marginBottom="@dimen/fab_margin_bottom"
+            android:layout_marginBottom="@dimen/fab_margin_end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

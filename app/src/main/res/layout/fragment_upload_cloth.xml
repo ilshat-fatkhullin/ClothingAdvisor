@@ -39,7 +39,7 @@
         <Button
             android:id="@+id/upload_photo"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/fab_margin_bottom"
+            android:layout_marginBottom="@dimen/fab_margin_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/upload_photo"/>
