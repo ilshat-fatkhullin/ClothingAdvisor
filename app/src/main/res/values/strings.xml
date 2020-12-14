@@ -16,4 +16,6 @@
     <string name="remove">Remove</string>
     <string name="text_recommend">Your recommendation</string>
     <string name="send_verification_link">Send email verification link</string>
+    <string name="category">Category</string>
+    <string name="temperature">Temperature</string>
 </resources>

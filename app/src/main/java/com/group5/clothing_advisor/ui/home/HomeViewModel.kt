@@ -52,54 +52,60 @@ class HomeViewModel : ViewModel() {
             return
 
         FirebaseFirestore.getInstance().collection("users")
-                .document(FirebaseAuth.getInstance().currentUser!!.uid)
-                .collection("clothes").get()
-                .addOnSuccessListener { result ->
-                    val list = ArrayList<ClothResponseItem>()
-                    for (category in _categories.value!!) {
-                        for (document in result) {
-                            if (_temperatureOption.value != null &&
-                                    _temperatureOption.value!!.id == document.getString("temperature_id")
-                                    && category.id == document.getString("category_id")) {
+            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .collection("clothes").get()
+            .addOnSuccessListener { result ->
+                val list = ArrayList<ClothResponseItem>()
+                for (category in _categories.value!!) {
+                    for (document in result) {
+                        val categoryId = document.getString("category_id")
+                        if (_temperatureOption.value != null &&
+                            _temperatureOption.value!!.id == document.getString("temperature_id")
+                            && category.id == categoryId
+                        ) {
 
-                                list.add(
-                                        ClothResponseItem(
-                                                document.id,
-                                                document.getString("image_url")!!
-                                        ))
-                                break
-                            }
-
+                            list.add(
+                                ClothResponseItem(
+                                    document.id,
+                                    document.getString("image_url")!!,
+                                    getCategoryNameById(categoryId),
+                                    _temperatureOption.value!!.name
+                                )
+                            )
+                            break
                         }
+
                     }
-                    _recommendation.postValue(list)
-                    _recommendationLoadingStatus.value = ApiStatus.DONE
                 }
-                .addOnFailureListener {
-                    _recommendationLoadingStatus.value = ApiStatus.ERROR
-                }
+                _recommendation.postValue(list)
+                _recommendationLoadingStatus.value = ApiStatus.DONE
+            }
+            .addOnFailureListener {
+                _recommendationLoadingStatus.value = ApiStatus.ERROR
+            }
     }
 
     private fun getTemperatureOption() {
         getWeather()
         FirebaseFirestore.getInstance().collection("temperature").get()
-                .addOnSuccessListener { result ->
-                    for (document in result) {
-                        if (_weatherInfo.value?.temperature!! >= document.getLong("from")!!
-                                && _weatherInfo.value?.temperature!! < document.getLong("to")!!) {
-                            _temperatureOption.value = TemperatureResponseItem(
-                                    document.id,
-                                    document.get("name") as String,
-                                    document.getLong("from") as Long,
-                                    document.getLong("to") as Long
-                            )
-                            break
-                        }
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    if (_weatherInfo.value?.temperature!! >= document.getLong("from")!!
+                        && _weatherInfo.value?.temperature!! < document.getLong("to")!!
+                    ) {
+                        _temperatureOption.value = TemperatureResponseItem(
+                            document.id,
+                            document.get("name") as String,
+                            document.getLong("from") as Long,
+                            document.getLong("to") as Long
+                        )
+                        break
                     }
-                    _optionLoadingStatus.value = ApiStatus.DONE
-                }.addOnFailureListener { result ->
-                    _optionLoadingStatus.value = ApiStatus.ERROR
                 }
+                _optionLoadingStatus.value = ApiStatus.DONE
+            }.addOnFailureListener { result ->
+                _optionLoadingStatus.value = ApiStatus.ERROR
+            }
     }
 
     private fun getWeather() {
@@ -114,32 +120,29 @@ class HomeViewModel : ViewModel() {
             return
 
         FirebaseFirestore.getInstance().collection("categories").get()
-                .addOnSuccessListener { result ->
-                    val list = ArrayList<CategoryResponseItem>()
-                    for (document in result) {
-                        list.add(
-                                CategoryResponseItem(
-                                        document.id,
-                                        document.get("name") as String
-                                )
+            .addOnSuccessListener { result ->
+                val list = ArrayList<CategoryResponseItem>()
+                for (document in result) {
+                    list.add(
+                        CategoryResponseItem(
+                            document.id,
+                            document.get("name") as String
                         )
-                    }
-                    _categories.postValue(list)
-                    _categoriesLoadingStatus.value = ApiStatus.DONE
-                }.addOnFailureListener { result ->
-                    _categories.postValue(ArrayList())
-                    _categoriesLoadingStatus.value = ApiStatus.ERROR
+                    )
                 }
-
-        viewModelScope.launch {
-            try {
-
+                _categories.postValue(list)
                 _categoriesLoadingStatus.value = ApiStatus.DONE
-            } catch (e: Exception) {
-                _categories.value = null
+            }.addOnFailureListener { result ->
+                _categories.postValue(ArrayList())
                 _categoriesLoadingStatus.value = ApiStatus.ERROR
             }
-        }
     }
 
+    private fun getCategoryNameById(id: String): String {
+        for (category in _categories.value!!) {
+            if (category.id == id)
+                return category.name
+        }
+        return ""
+    }
 }
