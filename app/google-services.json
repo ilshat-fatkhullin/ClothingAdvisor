@@ -52,6 +52,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "595589741391-dp90tcj08vd5u4masge215ced0a2ggvj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.group5.clothing_advisor",
+            "certificate_hash": "d4677fa9a93389e4f0f832b36e0cbb79af103ebb"
+          }
+        },
+        {
           "client_id": "595589741391-2i5v19rbhgb407nk824o6l7mch24ugt9.apps.googleusercontent.com",
           "client_type": 3
         }
