@@ -82,6 +82,9 @@ class UploadClothFragment : Fragment() {
         binding.add.setOnClickListener {
             viewModel.uploadImage()
         }
+        binding.photo.setOnClickListener {
+            launchGallery()
+        }
         viewModel.categories.observe(this.viewLifecycleOwner, Observer {
             setCategories(it)
         })
