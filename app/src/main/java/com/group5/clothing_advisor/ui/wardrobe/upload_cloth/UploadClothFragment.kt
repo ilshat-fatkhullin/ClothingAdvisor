@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
 import com.group5.clothing_advisor.R
 import com.group5.clothing_advisor.data.CategoryResponseItem
 import com.group5.clothing_advisor.data.TemperatureResponseItem
@@ -97,6 +99,11 @@ class UploadClothFragment : Fragment() {
                 Toast.makeText(requireContext(), "Network error", Toast.LENGTH_LONG)
                 viewModel.errorShown()
             }
+        })
+        viewModel.pathToImage.observe(this.viewLifecycleOwner, Observer {
+            Glide.with(this)
+                .load(it)
+                .into(binding.photo)
         })
 
         return binding.root
