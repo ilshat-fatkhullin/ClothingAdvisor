@@ -14,4 +14,5 @@
     <string name="add">Add</string>
     <string name="select_picture">Select Picture</string>
     <string name="remove">Remove</string>
+    <string name="send_verification_link">Send email verification link</string>
 </resources>
