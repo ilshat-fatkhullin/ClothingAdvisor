@@ -1,6 +1,6 @@
-package com.norfoe.weather.providers
+package com.group5.weather.providers
 
-import com.norfoe.weather.WeatherInfo
+import com.group5.weather.WeatherInfo
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call

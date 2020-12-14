@@ -9,9 +9,9 @@ import com.group5.clothing_advisor.data.ApiStatus
 import com.group5.clothing_advisor.data.CategoryResponseItem
 import com.group5.clothing_advisor.data.ClothResponseItem
 import com.group5.clothing_advisor.data.TemperatureResponseItem
-import com.norfoe.weather.Weather
-import com.norfoe.weather.WeatherInfo
-import com.norfoe.weather.providers.OpenWeatherApiProvider
+import com.group5.weather.Weather
+import com.group5.weather.WeatherInfo
+import com.group5.weather.providers.OpenWeatherApiProvider
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
