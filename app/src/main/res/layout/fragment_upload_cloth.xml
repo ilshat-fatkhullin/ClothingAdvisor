@@ -13,44 +13,119 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/photo"
-            android:layout_width="match_parent"
-            android:layout_height="266dp"
-            android:contentDescription="@string/photo"
-            android:scaleType="centerInside"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
 
-        <Spinner
-            android:id="@+id/categories_spinner"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/photo" />
+            android:layout_margin="@dimen/grid_view_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/image_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/grid_view_padding"
+                    android:gravity="end"
+                    android:text="@string/image"
+                    android:textSize="@dimen/title_text_size" />
+
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="266dp"
+                    android:layout_margin="@dimen/grid_view_padding"
+                    android:contentDescription="@string/photo"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_baseline_add_24"
+                    tools:src="@drawable/ic_baseline_add_24" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/categorySpinnerCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/grid_view_padding"
+            app:layout_constraintTop_toBottomOf="@+id/imageCardView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/spinner_category_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/grid_view_padding"
+                    android:gravity="end"
+                    android:text="@string/category"
+                    android:textSize="@dimen/title_text_size" />
+
+                <Spinner
+                    android:id="@+id/categories_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spinner_height"
+                    android:layout_margin="@dimen/grid_view_padding" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/temperatureSpinnerCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/grid_view_padding"
+            app:layout_constraintTop_toBottomOf="@+id/categorySpinnerCardView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/spinner_temperature_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/grid_view_padding"
+                    android:gravity="end"
+                    android:text="@string/temperature"
+                    android:textSize="@dimen/title_text_size" />
+
+                <Spinner
+                    android:id="@+id/temperature_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spinner_height"
+                    android:layout_margin="@dimen/grid_view_padding" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/add"
-            app:layout_constraintBottom_toTopOf="@id/upload_photo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_margin="@dimen/grid_view_padding"
+            android:text="@string/add"
             android:visibility="@{viewModel.isValid() ? View.VISIBLE:View.GONE}"
-            android:text="@string/add"/>
+            app:layout_constraintBottom_toTopOf="@id/upload_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <Button
             android:id="@+id/upload_photo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_margin="@dimen/grid_view_padding"
+            android:text="@string/upload_photo"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/fab_margin_end"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/upload_photo"/>
-
-        <Spinner
-            android:id="@+id/temperature_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categories_spinner" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
