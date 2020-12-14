@@ -2,103 +2,111 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.group5.clothing_advisor.ui.wardrobe.cloth_details.ClothDetailsViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/photo"
-            android:layout_width="match_parent"
-            android:layout_height="266dp"
-            android:layout_margin="@dimen/grid_view_padding"
-            android:contentDescription="@string/photo"
-            android:scaleType="centerInside"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+        android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/categoryCardView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/grid_view_padding"
-            app:layout_constraintBottom_toTopOf="@+id/remove"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/photo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="266dp"
+                android:layout_margin="@dimen/grid_view_padding"
+                android:contentDescription="@string/photo"
+                android:scaleType="centerInside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
-                <TextView
-                    android:id="@+id/category_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/grid_view_padding"
-                    android:gravity="end"
-                    android:text="@string/category"
-                    android:textSize="@dimen/title_text_size" />
-
-                <TextView
-                    android:id="@+id/category"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/grid_view_padding"
-                    android:gravity="start"
-                    android:text="@{viewModel.selectedCloth.category}"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/text_size" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/temperatureCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/grid_view_padding"
-            app:layout_constraintTop_toBottomOf="@+id/categoryCardView">
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/categoryCardView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/grid_view_padding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/photo">
 
-                <TextView
-                    android:id="@+id/temperature_title"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/grid_view_padding"
-                    android:gravity="end"
-                    android:text="@string/temperature"
-                    android:textSize="@dimen/title_text_size" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/temperature"
+                    <TextView
+                        android:id="@+id/category_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/grid_view_padding"
+                        android:gravity="end"
+                        android:text="@string/category"
+                        android:textSize="@dimen/title_text_size" />
+
+                    <TextView
+                        android:id="@+id/category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/grid_view_padding"
+                        android:gravity="start"
+                        android:text="@{viewModel.selectedCloth.category}"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/text_size" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/temperatureCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/grid_view_padding"
+                app:layout_constraintTop_toBottomOf="@+id/categoryCardView">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/grid_view_padding"
-                    android:gravity="start"
-                    android:text="@{viewModel.selectedCloth.temperature}"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/text_size" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-        <Button
-            android:id="@+id/remove"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_margin="@dimen/grid_view_padding"
-            android:text="@string/remove"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/temperature_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/grid_view_padding"
+                        android:gravity="end"
+                        android:text="@string/temperature"
+                        android:textSize="@dimen/title_text_size" />
+
+                    <TextView
+                        android:id="@+id/temperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/grid_view_padding"
+                        android:gravity="start"
+                        android:text="@{viewModel.selectedCloth.temperature}"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/text_size" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/remove"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_margin="@dimen/grid_view_padding"
+                android:text="@string/remove"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temperatureCardView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

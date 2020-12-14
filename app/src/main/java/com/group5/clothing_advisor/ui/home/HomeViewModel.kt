@@ -48,7 +48,10 @@ class HomeViewModel : ViewModel() {
     }
 
     fun loadRecommendation() {
-        if (_recommendationLoadingStatus.value == ApiStatus.LOADING)
+        if (_recommendationLoadingStatus.value == ApiStatus.LOADING ||
+            _categoriesLoadingStatus.value != ApiStatus.DONE ||
+            _optionLoadingStatus.value != ApiStatus.DONE
+        )
             return
 
         if (FirebaseAuth.getInstance().currentUser == null)
@@ -106,6 +109,7 @@ class HomeViewModel : ViewModel() {
                     }
                 }
                 _optionLoadingStatus.value = ApiStatus.DONE
+                loadRecommendation()
             }.addOnFailureListener { result ->
                 _optionLoadingStatus.value = ApiStatus.ERROR
             }
@@ -135,6 +139,7 @@ class HomeViewModel : ViewModel() {
                 }
                 _categories.postValue(list)
                 _categoriesLoadingStatus.value = ApiStatus.DONE
+                loadRecommendation()
             }.addOnFailureListener { result ->
                 _categories.postValue(ArrayList())
                 _categoriesLoadingStatus.value = ApiStatus.ERROR

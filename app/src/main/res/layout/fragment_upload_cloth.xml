@@ -10,7 +10,10 @@
         <import type="android.view.View"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -49,12 +52,23 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+
+        <Button
+            android:id="@+id/upload_photo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_margin="@dimen/grid_view_padding"
+            android:text="@string/upload_photo"
+            app:layout_constraintTop_toBottomOf="@id/imageCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/categorySpinnerCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/grid_view_padding"
-            app:layout_constraintTop_toBottomOf="@+id/imageCardView">
+            app:layout_constraintTop_toBottomOf="@id/upload_photo">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,18 +128,9 @@
             android:layout_margin="@dimen/grid_view_padding"
             android:text="@string/add"
             android:visibility="@{viewModel.isValid() ? View.VISIBLE:View.GONE}"
-            app:layout_constraintBottom_toTopOf="@id/upload_photo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/upload_photo"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_margin="@dimen/grid_view_padding"
-            android:text="@string/upload_photo"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperatureSpinnerCardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

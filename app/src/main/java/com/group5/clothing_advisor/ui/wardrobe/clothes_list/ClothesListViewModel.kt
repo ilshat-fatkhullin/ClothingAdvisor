@@ -68,6 +68,7 @@ class ClothesListViewModel : ViewModel() {
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .collection("clothes").get()
             .addOnSuccessListener { result ->
+
                 val list = ArrayList<ClothResponseItem>()
                 for (document in result) {
                     val categoryId = document.getString("category_id")
@@ -108,6 +109,7 @@ class ClothesListViewModel : ViewModel() {
                 }
                 _categories.postValue(list)
                 _categoriesLoadingStatus.value = ApiStatus.DONE
+                loadClothes()
             }.addOnFailureListener { result ->
                 _categories.postValue(ArrayList())
                 _categoriesLoadingStatus.value = ApiStatus.ERROR
@@ -133,6 +135,7 @@ class ClothesListViewModel : ViewModel() {
                 }
                 _temperatures.postValue(list)
                 _temperaturesLoadingStatus.value = ApiStatus.DONE
+                loadClothes()
             }.addOnFailureListener { result ->
                 _temperatures.postValue(ArrayList())
                 _temperaturesLoadingStatus.value = ApiStatus.ERROR

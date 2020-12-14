@@ -28,6 +28,5 @@ class WardrobeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(WardrobeViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 }
