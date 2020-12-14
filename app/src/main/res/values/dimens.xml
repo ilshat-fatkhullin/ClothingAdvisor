@@ -11,4 +11,8 @@
     <dimen name="fab_margin_end">16dp</dimen>
     <dimen name="fab_margin_bottom">64dp</dimen>
     <dimen name="action_bar_height">16dp</dimen>
+    <dimen name="text_margin">10dp</dimen>
+    <dimen name="button_margin">8dp</dimen>
+    <dimen name="title_text_size">10pt</dimen>
+    <dimen name="text_size">8pt</dimen>
 </resources>

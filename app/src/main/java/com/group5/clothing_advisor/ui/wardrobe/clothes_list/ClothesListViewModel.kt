@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.group5.clothing_advisor.data.ApiStatus
 import com.group5.clothing_advisor.data.CategoryResponseItem
 import com.group5.clothing_advisor.data.ClothResponseItem
+import com.group5.clothing_advisor.data.TemperatureResponseItem
 import kotlinx.coroutines.launch
 
 class ClothesListViewModel : ViewModel() {
@@ -17,12 +18,19 @@ class ClothesListViewModel : ViewModel() {
     val categories: LiveData<List<CategoryResponseItem>>
         get() = _categories
 
+    private val _temperatures = MutableLiveData<List<TemperatureResponseItem>>()
+
+    val temperatures: LiveData<List<TemperatureResponseItem>>
+        get() = _temperatures
+
     private val _selectedCategory = MutableLiveData<CategoryResponseItem>()
 
     val selectedCategory: LiveData<CategoryResponseItem>
         get() = _selectedCategory
 
     private val _categoriesLoadingStatus = MutableLiveData<ApiStatus>()
+
+    private val _temperaturesLoadingStatus = MutableLiveData<ApiStatus>()
 
     private val _clothesLoadingStatus = MutableLiveData<ApiStatus>()
 
@@ -37,6 +45,7 @@ class ClothesListViewModel : ViewModel() {
     init {
         _clothes.value = ArrayList()
         loadCategories()
+        loadTemperatures()
     }
 
     fun selectCategory(position: Int) {
@@ -49,7 +58,10 @@ class ClothesListViewModel : ViewModel() {
     }
 
     private fun loadClothes() {
-        if (_clothesLoadingStatus.value == ApiStatus.LOADING)
+        if (_clothesLoadingStatus.value == ApiStatus.LOADING ||
+            _categoriesLoadingStatus.value != ApiStatus.DONE ||
+            _temperaturesLoadingStatus.value != ApiStatus.DONE
+        )
             return
 
         FirebaseFirestore.getInstance().collection("users")
@@ -58,12 +70,16 @@ class ClothesListViewModel : ViewModel() {
             .addOnSuccessListener { result ->
                 val list = ArrayList<ClothResponseItem>()
                 for (document in result) {
-                    if (_selectedCategory.value != null && _selectedCategory.value!!.id != document.getString("category_id"))
+                    val categoryId = document.getString("category_id")
+                    val temperatureId = document.getString("temperature_id")
+                    if (_selectedCategory.value != null && _selectedCategory.value!!.id != categoryId)
                         continue
                     list.add(
                         ClothResponseItem(
                             document.id,
-                            document.getString("image_url")!!
+                            document.getString("image_url")!!,
+                            getCategoryNameById(categoryId!!),
+                            getTemperatureNameById(temperatureId!!)
                         )
                     )
                 }
@@ -80,10 +96,9 @@ class ClothesListViewModel : ViewModel() {
             return
 
         FirebaseFirestore.getInstance().collection("categories").get()
-            .addOnSuccessListener {result ->
+            .addOnSuccessListener { result ->
                 val list = ArrayList<CategoryResponseItem>()
-                for (document in result)
-                {
+                for (document in result) {
                     list.add(
                         CategoryResponseItem(
                             document.id,
@@ -93,19 +108,50 @@ class ClothesListViewModel : ViewModel() {
                 }
                 _categories.postValue(list)
                 _categoriesLoadingStatus.value = ApiStatus.DONE
-            }.addOnFailureListener {result ->
+            }.addOnFailureListener { result ->
                 _categories.postValue(ArrayList())
                 _categoriesLoadingStatus.value = ApiStatus.ERROR
             }
+    }
 
-        viewModelScope.launch {
-            try {
+    private fun loadTemperatures() {
+        if (_temperaturesLoadingStatus.value == ApiStatus.LOADING)
+            return
 
-                _categoriesLoadingStatus.value = ApiStatus.DONE
-            } catch (e: Exception) {
-                _categories.value = null
-                _categoriesLoadingStatus.value = ApiStatus.ERROR
+        FirebaseFirestore.getInstance().collection("temperature").get()
+            .addOnSuccessListener { result ->
+                val list = ArrayList<TemperatureResponseItem>()
+                for (document in result) {
+                    list.add(
+                        TemperatureResponseItem(
+                            document.id,
+                            document.get("name") as String,
+                            document.get("from") as Long,
+                            document.get("to") as Long
+                        )
+                    )
+                }
+                _temperatures.postValue(list)
+                _temperaturesLoadingStatus.value = ApiStatus.DONE
+            }.addOnFailureListener { result ->
+                _temperatures.postValue(ArrayList())
+                _temperaturesLoadingStatus.value = ApiStatus.ERROR
             }
+    }
+
+    private fun getCategoryNameById(id: String): String {
+        for (category in _categories.value!!) {
+            if (category.id == id)
+                return category.name
         }
+        return ""
+    }
+
+    private fun getTemperatureNameById(id: String): String {
+        for (temperature in _temperatures.value!!) {
+            if (temperature.id == id)
+                return temperature.name
+        }
+        return ""
     }
 }

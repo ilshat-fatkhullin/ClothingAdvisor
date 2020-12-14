@@ -1,6 +1,6 @@
-package com.norfoe.weather
+package com.group5.weather
 
-import com.norfoe.weather.providers.OpenWeatherApiProvider
+import com.group5.weather.providers.OpenWeatherApiProvider
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 

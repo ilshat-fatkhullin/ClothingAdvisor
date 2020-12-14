@@ -1,4 +1,4 @@
-package com.norfoe.weather.providers
+package com.group5.weather.providers
 
 import com.squareup.moshi.Json
 

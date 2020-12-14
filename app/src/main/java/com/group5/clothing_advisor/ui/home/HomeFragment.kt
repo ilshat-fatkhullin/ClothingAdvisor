@@ -5,27 +5,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import com.group5.clothing_advisor.R
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.group5.clothing_advisor.databinding.FragmentHomeBinding
+import com.group5.clothing_advisor.ui.adapters.ClothesAdapter
+import com.group5.clothing_advisor.ui.wardrobe.clothes_list.ClothesListFragmentDirections
 
 class HomeFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
     private lateinit var viewModel: HomeViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+    private lateinit var binding: FragmentHomeBinding
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentHomeBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        binding.viewModel = viewModel
+
+        binding.recommendationGrid.adapter =
+            ClothesAdapter(
+                ClothesAdapter.OnClickListener {
+                })
+
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.loadRecommendation()
+            if (binding.swiperefresh.isRefreshing) {
+                binding.swiperefresh.isRefreshing = false;
+            }
+        }
+
+        return binding.root
     }
 }
