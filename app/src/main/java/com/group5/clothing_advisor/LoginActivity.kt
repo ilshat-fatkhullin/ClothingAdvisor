@@ -56,7 +56,6 @@ class LoginActivity : AppCompatActivity() {
                 ) {
                     currUser?.sendEmailVerification()
                 }
-                // ...
             } else {
                 if(requestCode == RC_SIGN_UP){
                     Log.e(TAG, "Could not complete registration")
@@ -64,10 +63,6 @@ class LoginActivity : AppCompatActivity() {
                 else {
                     Log.e(TAG, "Could not complete sign in: ${response?.error}")
                 }
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
             }
         }
 

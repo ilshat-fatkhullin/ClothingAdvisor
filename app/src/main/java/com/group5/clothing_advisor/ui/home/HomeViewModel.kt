@@ -1,8 +1,8 @@
 package com.group5.clothing_advisor.ui.home
 
-import android.util.Log
-import android.util.Log.INFO
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.group5.clothing_advisor.data.ApiStatus
@@ -12,7 +12,6 @@ import com.group5.clothing_advisor.data.TemperatureResponseItem
 import com.group5.weather.Weather
 import com.group5.weather.WeatherInfo
 import com.group5.weather.providers.OpenWeatherApiProvider
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class HomeViewModel : ViewModel() {
@@ -110,7 +109,7 @@ class HomeViewModel : ViewModel() {
                 }
                 _optionLoadingStatus.value = ApiStatus.DONE
                 loadRecommendation()
-            }.addOnFailureListener { result ->
+            }.addOnFailureListener {
                 _optionLoadingStatus.value = ApiStatus.ERROR
             }
     }
@@ -140,7 +139,7 @@ class HomeViewModel : ViewModel() {
                 _categories.postValue(list)
                 _categoriesLoadingStatus.value = ApiStatus.DONE
                 loadRecommendation()
-            }.addOnFailureListener { result ->
+            }.addOnFailureListener {
                 _categories.postValue(ArrayList())
                 _categoriesLoadingStatus.value = ApiStatus.ERROR
             }
