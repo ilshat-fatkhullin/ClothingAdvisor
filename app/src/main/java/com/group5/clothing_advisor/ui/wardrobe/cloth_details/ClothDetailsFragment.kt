@@ -45,7 +45,7 @@ class ClothDetailsFragment : Fragment() {
         })
         viewModel.showError.observe(this.viewLifecycleOwner, Observer {
             if (it) {
-                Toast.makeText(requireContext(), "Network error", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), "Network error", Toast.LENGTH_LONG).show()
                 viewModel.errorShown()
             }
         })
