@@ -44,8 +44,12 @@ class ClothesListViewModel : ViewModel() {
 
     init {
         _clothes.value = ArrayList()
+        _clothesLoadingStatus.value = null
+        _categoriesLoadingStatus.value = null
+        _temperaturesLoadingStatus.value = null
         loadCategories()
         loadTemperatures()
+        loadClothes()
     }
 
     fun selectCategory(position: Int) {
